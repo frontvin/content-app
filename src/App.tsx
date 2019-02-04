@@ -85,9 +85,9 @@ interface IUsers {
 
 // functional components
 
-const Button: React.FC<IButton> = ({label}: IButton) => {
+const Button: React.FC<IButton> = ({label, getContent}: IButton) => {
   return (
-      <button className="btn">
+      <button className="btn" onClick={getContent}>
         {label}
       </button>)
 };
@@ -115,7 +115,8 @@ class App extends Component {
     content: [],
   };
 
-  componentDidMount() {
+
+  getContent() {
     axios.get(`https://jsonplaceholder.typicode.com/posts`)
       .then(res => {
       const content: string = res.data;
@@ -133,6 +134,7 @@ class App extends Component {
                 <Button
                     key={index}
                     label={button.label}
+                    getContent={this.getContent}
                 />
               )
             })
