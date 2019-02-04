@@ -122,6 +122,7 @@ class App extends Component {
                 <Button
                     key={index}
                     label={button.label}
+                    getContent={button.getContent}
                 />
               )
             })
