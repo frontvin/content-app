@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import axios from "axios";
 
 // App interfaces
 // button
@@ -110,8 +111,18 @@ class App extends Component {
       {label: "Photos", activeButton: false, getContent: () => {}},
       {label: "Todos", activeButton: false, getContent: () => {}},
       {label: "Users", activeButton: false, getContent: () => {}}
-    ]
+    ],
+    content: [],
   };
+
+  componentDidMount() {
+    axios.get(`https://jsonplaceholder.typicode.com/posts`)
+      .then(res => {
+      const content: string = res.data;
+      this.setState({ content });
+      console.log(content[0])
+    })
+  }
 
   render() {
     return (
@@ -122,7 +133,6 @@ class App extends Component {
                 <Button
                     key={index}
                     label={button.label}
-                    getContent={button.getContent}
                 />
               )
             })
