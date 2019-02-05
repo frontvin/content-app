@@ -11,10 +11,9 @@ export interface IButton {
 }
 
 // content
-// export interface IContent {
-//   display: boolean;
-//   displayContent: () => string; // content displays as string
-// }
+export interface IContent {
+  content: []
+}
 
 // Content interfaces
 // posts
@@ -85,64 +84,68 @@ interface IUsers {
 
 // functional components
 
-const Button: React.FC<IButton> = ({label, getContent}: IButton) => {
+const Button: React.FC<IButton> = ({ label, getContent }: IButton) => {
   return (
       <button className="btn" onClick={getContent}>
         {label}
-      </button>)
+      </button>
+  );
 };
 
-const Content: React.FC = () => {
+const Content: React.FC<IContent> = ({ content }) => {
   return (
       <div className="content">
-
+        {content.map(item => (
+            <div key={item.id}>
+              <h4>{item.title}</h4>
+              <p>{item.body}</p>
+            </div>
+        ))}
       </div>
-  )
-}
+  );
+};
+
+
 
 // App class
 class App extends Component {
   // state
   state = {
     buttons: [
-      {label: "Posts", activeButton: false, getContent: () => {}},
-      {label: "Comments", activeButton: false, getContent: () => {}},
-      {label: "Albums", activeButton: false, getContent: () => {}},
-      {label: "Photos", activeButton: false, getContent: () => {}},
-      {label: "Todos", activeButton: false, getContent: () => {}},
-      {label: "Users", activeButton: false, getContent: () => {}}
+      { label: "Posts", activeButton: false, getContent: () => {} },
+      { label: "Comments", activeButton: false, getContent: () => {} },
+      { label: "Albums", activeButton: false, getContent: () => {} },
+      { label: "Photos", activeButton: false, getContent: () => {} },
+      { label: "Todos", activeButton: false, getContent: () => {} },
+      { label: "Users", activeButton: false, getContent: () => {} }
     ],
-    content: [],
+    content: []
   };
 
-
-  getContent() {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`)
-      .then(res => {
+  getContent = () => {
+    axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
       const content: string = res.data;
       this.setState({ content });
-      console.log(content[0])
-    })
-  }
+    });
+  };
 
   render() {
     return (
-      <div className="app">
-        <div className="buttons">
-          {this.state.buttons.map((button, index) => {
-            return (
-                <Button
-                    key={index}
-                    label={button.label}
-                    getContent={this.getContent}
-                />
-              )
-            })
-          }
-        </div>
+        <div className="app">
+          <div className="buttons">
+            {this.state.buttons.map((button, index) => {
+              return (
+                  <Button
+                      key={index}
+                      label={button.label}
+                      getContent={this.getContent}
+                  />
+              );
+            })}
+          </div>
 
-        <Content />
-      </div>
+          <Content content={this.state.content} />
+        </div>
     );
   }
 }
