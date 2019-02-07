@@ -41,7 +41,6 @@ interface IAlbum {
   id: number;
   title: string;
 }
-
 // photos
 interface IPhotos {
   albumId: number;
