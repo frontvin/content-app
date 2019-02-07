@@ -15,6 +15,10 @@ interface IContent {
   content: string;
 }
 
+interface IState {
+  content: string;
+}
+
 interface IPosts {
   userId: number;
   id: number;
@@ -95,11 +99,13 @@ const Content: React.FC<IContent> = ({ content }) => {
 
 // App class
 // add generic props, state
-class App extends Component {
+class App extends Component<object, IState> {
   // state
-  state = {
-    content: ""
-  };
+
+  constructor(props: object){
+    super(props);
+    this.state = {content: ""}
+  }
 
   private getContent = (type: string) => {
     axios.get(`https://jsonplaceholder.typicode.com/${type}`).then(res => {
