@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export function contentReducer(
-  state: object = initialState,
+  state = initialState,
   action: { type: string; payload: string }
 ) {
   switch (action.type) {

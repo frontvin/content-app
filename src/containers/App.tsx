@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Button from '../components/button/Button';
 import Content from '../components/content/Content';
 // import Interfaces from "../components/content/content-types/interfaces";
+
+import { getContentRequest } from '../actions/actions';
 import axios from 'axios';
-
 import './App.css';
-
-import { connect } from 'react-redux';
 
 // App interfaces
 interface IState {
