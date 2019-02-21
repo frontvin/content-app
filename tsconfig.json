@@ -7,6 +7,9 @@
       "esnext"
     ],
     "allowJs": true,
+    "plugins": [
+      { "name": "tslint-language-service"}
+    ],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
