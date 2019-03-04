@@ -1,27 +1,32 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import createSagaMiddleware from 'redux-saga'
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import logger from 'redux-logger'
-import rootReducer from './reducers/rootReducer'
-import App from './containers/App'
-import { rootSaga } from './sagas/rootSaga'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './containers/App';
+import * as serviceWorker from './serviceWorker';
 
-import './index.css'
-import * as serviceWorker from './serviceWorker'
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
 
-const sagaMiddleware = createSagaMiddleware()
+import logger from 'redux-logger';
+import { reducer } from './reducers/rootReducer';
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
+import { watcherSaga } from './sagas/rootSaga';
 
-sagaMiddleware.run(rootSaga)
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+    reducer,
+    applyMiddleware(sagaMiddleware, logger)
+);
+
+sagaMiddleware.run(watcherSaga);
 
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root')
-)
+);
 
-serviceWorker.unregister()
+serviceWorker.unregister();

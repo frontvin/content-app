@@ -4,7 +4,6 @@ import Button from '../components/button/Button'
 import Content from '../components/content/Content'
 
 import './App.css'
-import {getContentRequest} from "../actions/actions";
 
 // App interfaces
 interface IState {
@@ -21,13 +20,13 @@ class App extends Component<object, IState> {
       { label: 'photos' },
       { label: 'todos' },
       { label: 'users' },
-    ]
+    ];
 
     return (
         <div className="app">
           <div className="buttons">
             {buttons.map((button, index) => {
-              return <Button key={index} label={button.label} onClick={getContentRequest}/>
+              return <Button key={index} label={button.label} />
             })}
           </div>
           // test
@@ -36,5 +35,19 @@ class App extends Component<object, IState> {
     )
   }
 }
+
+const mapStateToProps = (state: { axRequest: any; content: any; error: any; }) => {
+    return {
+        axRequest: state.axRequest,
+        content: state.content,
+        error: state.error
+    };
+};
+
+const mapDispatchToProps = (dispatch: (arg0: { type: string; }) => void) => {
+    return {
+        onRequestContent: () => dispatch({ type: "GET_CONTENT_REQUEST" })
+    };
+};
 
 export default connect()(App)
