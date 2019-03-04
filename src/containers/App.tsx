@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Button from '../components/button/Button';
-import Content from '../components/content/Content';
-// import Interfaces from "../components/content/content-types/interfaces";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Button from '../components/button/Button'
+import Content from '../components/content/Content'
 
-import { getContentRequest } from '../actions/actions';
-import axios from 'axios';
-import './App.css';
+import './App.css'
 
 // App interfaces
 interface IState {
@@ -15,41 +12,28 @@ interface IState {
 
 // App class
 class App extends Component<object, IState> {
-  private getContent = (type: string) => {
-    axios.get(`https://jsonplaceholder.typicode.com/${type}`).then(res => {
-      const content: string = JSON.stringify(res.data);
-      this.setState({ content });
-    });
-  };
-
   render() {
     const buttons = [
-      { label: 'posts', activeButton: false },
-      { label: 'comments', activeButton: false },
-      { label: 'albums', activeButton: false },
-      { label: 'photos', activeButton: false },
-      { label: 'todos', activeButton: false },
-      { label: 'users', activeButton: false }
-    ];
+      { label: 'posts' },
+      { label: 'comments' },
+      { label: 'albums' },
+      { label: 'photos' },
+      { label: 'todos' },
+      { label: 'users' },
+    ]
 
     return (
-      <div className="app">
-        <div className="buttons">
-          {buttons.map((button, index) => {
-            return (
-              <Button
-                key={index}
-                label={button.label}
-                getContent={this.getContent}
-              />
-            );
-          })}
+        <div className="app">
+          <div className="buttons">
+            {buttons.map((button, index) => {
+              return <Button key={index} label={button.label} />
+            })}
+          </div>
+          // test
+          <Content content={'test'} />
         </div>
-
-        <Content content={this.props.content} />
-      </div>
-    );
+    )
   }
 }
 
-export default App;
+export default connect()(App)

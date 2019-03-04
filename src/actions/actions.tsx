@@ -1,8 +1,12 @@
-// constants
+// Action types
 export const GET_CONTENT_REQUEST = 'GET_CONTENT_REQUEST';
+// export const GET_CONTENT_SUCCESS = 'GET_CONTENT_SUCCESS';
+// export const GET_CONTENT_ERROR = 'GET_CONTENT_ERROR';
 
-// action creators
-export const getContentRequest = (content: string) => ({
-  type: GET_CONTENT_REQUEST,
-  payload: content
-});
+// Action creators
+export const getContentRequest = (content: string) => {
+  return {
+    type: GET_CONTENT_REQUEST,
+    content
+  }
+};
