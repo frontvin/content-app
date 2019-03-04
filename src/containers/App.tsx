@@ -4,6 +4,7 @@ import Button from '../components/button/Button'
 import Content from '../components/content/Content'
 
 import './App.css'
+import {getContentRequest} from "../actions/actions";
 
 // App interfaces
 interface IState {
@@ -26,7 +27,7 @@ class App extends Component<object, IState> {
         <div className="app">
           <div className="buttons">
             {buttons.map((button, index) => {
-              return <Button key={index} label={button.label} />
+              return <Button key={index} label={button.label} onClick={getContentRequest}/>
             })}
           </div>
           // test

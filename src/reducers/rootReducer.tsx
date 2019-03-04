@@ -4,10 +4,10 @@ const initialState = {
   content: '',
 }
 
-const reducer = (state = initialState, action: { type: any, payload: any }) => {
+function reducer (state = initialState, action: { type: any; payload: any; }) {
   switch (action.type) {
     case GET_CONTENT_REQUEST:
-      return { content: action.payload }
+      return { ...state };
 
     default:
       return state
