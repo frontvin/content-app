@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GET_CONTENT_REQUEST, getContentRequest } from '../actions/actions'
-import { takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 
 // test
-export const rootSaga: any = 'asdasd'
+export function* rootSaga(){}
