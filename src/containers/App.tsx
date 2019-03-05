@@ -12,7 +12,10 @@ interface IState {
 
 // App class
 class App extends Component<object, IState> {
+
   render() {
+    const { onRequestContent } = this.props;
+
     const buttons = [
       { label: 'posts' },
       { label: 'comments' },
@@ -26,7 +29,7 @@ class App extends Component<object, IState> {
         <div className="app">
           <div className="buttons">
             {buttons.map((button, index) => {
-              return <Button key={index} label={button.label} />
+              return <Button key={index} label={button.label} onRequestContent={onRequestContent} />
             })}
           </div>
           // test
@@ -50,4 +53,4 @@ const mapDispatchToProps = (dispatch: (arg0: { type: string; }) => void) => {
     };
 };
 
-export default connect()(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

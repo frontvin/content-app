@@ -4,8 +4,7 @@ import './Button.css';
 // button
 interface IButton {
   label: string;
-  // activeButton?: boolean;
-  // getContentRequest?: (type: string) => void;
+  onRequestContent?: (type: string) => void;
 }
 
 const Button: React.FC<IButton> = ({ label }: IButton) => {
