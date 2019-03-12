@@ -7,14 +7,18 @@ import './App.css'
 
 // App interfaces
 interface IState {
-  content: string;
+  content: string,
+}
+
+interface IApp {
+  onRequestContent?: () => void;
 }
 
 // App class
-class App extends Component<object, IState> {
+class App extends Component<IApp, IState> {
 
   render() {
-    const { onRequestContent } = this.props;
+    const { onRequestContent }= this.props;
 
     const buttons = [
       { label: 'posts' },
@@ -33,7 +37,7 @@ class App extends Component<object, IState> {
             })}
           </div>
           // test
-          <Content content={'test'} />
+          <Content content={"content"} />
         </div>
     )
   }

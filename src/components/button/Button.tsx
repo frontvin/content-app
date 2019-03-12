@@ -2,14 +2,14 @@ import React from 'react';
 import './Button.css';
 
 // button
-interface IButton {
+export interface IButton {
   label: string;
-  onRequestContent?: (type: string) => void;
+  onRequestContent?: () => void;
 }
 
-const Button: React.FC<IButton> = ({ label }: IButton) => {
+const Button: React.FC<IButton> = ({ label, onRequestContent }: IButton) => {
   return (
-    <button className="btn">
+    <button className="btn" onClick={onRequestContent}>
       {label}
     </button>
   );
