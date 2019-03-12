@@ -17,8 +17,8 @@ function axiosGetContent() {
 export function* workerSaga() {
     try {
         const response = yield call(axiosGetContent);
-        const content = response.data.message;
-
+        const content = JSON.stringify(response);
+        console.log(response)
         // dispatch a success action to the store with the new dog
         yield put({ type: "GET_CONTENT_SUCCESS", content });
 

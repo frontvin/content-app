@@ -2,7 +2,7 @@ import React from 'react';
 import './Button.css';
 
 // button
-export interface IButton {
+interface IButton {
   label: string;
   onRequestContent?: () => void;
 }
