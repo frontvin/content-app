@@ -3,15 +3,17 @@ import './Button.css';
 
 // button
 interface IButton {
-  label: string;
+  name: string;
   onRequestContent?: () => void;
 }
 
-const Button: React.FC<IButton> = ({ label, onRequestContent }: IButton) => {
+const Button: React.FC<IButton> = ({ name, onRequestContent }: IButton) => {
   return (
-    <button className="btn" onClick={onRequestContent}>
-      {label}
-    </button>
+    <div className="btn__container">
+      <button className="btn" onClick={onRequestContent}>
+        {name}
+      </button>
+    </div>
   );
 };
 
