@@ -7,23 +7,26 @@ export function* watcherSaga(){
     yield takeLatest("GET_CONTENT_REQUEST", workerSaga)
 }
 
+function delay(ms : number) {
+    return new Promise((resolve) => {
+        setTimeout(() => { resolve() } , ms)
+    })
+}
+
 function axiosGetContent() {
-    setTimeout(
-        function () {
-            return axios({
-                method: "get",
-                url: 'https://jsonplaceholder.typicode.com/posts'
-            })
-        },
-        10000
-    )
-    
+    return delay(5000).then(() => {
+        return axios({
+            method: "get",
+            url: 'https://jsonplaceholder.typicode.com/posts'
+        })
+    })
 }
 
 export function* workerSaga() {
     try {
         const response = yield call(axiosGetContent);
         const content = JSON.stringify(response);
+        console.log(content)
         // dispatch a success action to the store with the new dog
         yield put({ type: "GET_CONTENT_SUCCESS", content });
 
