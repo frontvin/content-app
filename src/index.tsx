@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from "redux-devtools-extension";
+
 
 import logger from 'redux-logger';
 import { reducer } from './reducers/rootReducer';
@@ -17,7 +19,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     reducer,
-    applyMiddleware(sagaMiddleware, logger)
+    composeWithDevTools(
+    applyMiddleware(sagaMiddleware, logger))
 );
 
 sagaMiddleware.run(watcherSaga);

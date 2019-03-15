@@ -8,7 +8,9 @@
     ],
     "allowJs": true,
     "plugins": [
-      { "name": "tslint-language-service"}
+      {
+        "name": "tslint-language-service"
+      }
     ],
     "skipLibCheck": true,
     "esModuleInterop": true,
