@@ -14,7 +14,7 @@ function delay(ms : number) {
 }
 
 function axiosGetContent() {
-    return delay(20000).then(() => {
+    return delay(5000).then(() => {
         return axios({
             method: "get",
             url: 'https://jsonplaceholder.typicode.com/posts'

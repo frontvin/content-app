@@ -9,6 +9,7 @@ const initialState = {
   content: '',
   loading: false,
   error: null,
+  cancelRequest: false
 };
 
 export function reducer (state = initialState, action: any ) {
@@ -39,6 +40,7 @@ export function reducer (state = initialState, action: any ) {
       return {
         ...state,
         loading: false,
+        cancelRequest: action.cancelRequest,
       }
     default:
       return state

@@ -3,20 +3,18 @@ import './Button.css';
 
 // button
 interface IButton {
-  name: string;
-  onRequestContent?: () => void;
-  onCancelRequest?: () => void;
+  btnName: string;
+  btnEvent?: () => void;
 }
 
 const Button: React.FC<IButton> = ({
-  name,
-  onRequestContent,
-  onCancelRequest
+  btnName,
+  btnEvent
 }: IButton) => {
   return (
     <div className="btn__container">
-      <button className="btn" onClick={onRequestContent || onCancelRequest}>
-        {name}
+      <button className="btn" onClick={btnEvent}>
+        {btnName}
       </button>
     </div>
   );
