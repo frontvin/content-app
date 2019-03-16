@@ -31,15 +31,17 @@ class App extends Component<IApp, IState> {
               />
               <Button name={"Cancel request"} />
             </div>
-            { loading ? 
+            {loading ? (
+              <div className="spinner__container">
                 <CircleSpinner
                   size={30}
                   color="#458435"
                   loading={loading}
                 />
-             : 
+              </div>
+            ) : (
               <Content content={content} />
-            }
+            )}
           </div>
         );
   }
