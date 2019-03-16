@@ -1,7 +1,8 @@
 import {
   GET_CONTENT_REQUEST,
   GET_CONTENT_SUCCESS,
-  GET_CONTENT_ERROR } from '../actions/actions'
+  GET_CONTENT_ERROR,
+  REQUEST_CANCELED } from '../actions/actions'
 
 const initialState = {
   axRequest: false,
@@ -34,6 +35,11 @@ export function reducer (state = initialState, action: any ) {
         error: action.error  
       };
       break;
+    case REQUEST_CANCELED:
+      return {
+        ...state,
+        loading: false,
+      }
     default:
       return state
   }

@@ -14,13 +14,19 @@ interface IApp {
   content: string,
   loading: boolean,
   onRequestContent?: () => void;
+  onCancelRequest?: () => void;
 }
 
 // App class
 class App extends Component<IApp, IState> {
 
   render() {
-    const { onRequestContent, loading, content } = this.props;
+    const {
+      onRequestContent,
+      onCancelRequest,
+      loading,
+      content
+    } = this.props;
       
         return (
           <div className="app">
@@ -29,7 +35,7 @@ class App extends Component<IApp, IState> {
                 name={"Get Posts"}
                 onRequestContent={onRequestContent}
               />
-              <Button name={"Cancel request"} />
+              <Button name={"Cancel request"} onCancelRequest={onCancelRequest}/>
             </div>
             {loading ? (
               <div className="spinner__container">

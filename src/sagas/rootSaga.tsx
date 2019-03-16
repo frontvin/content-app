@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, cancel, cancelled } from "redux-saga/effects";
 
 // test
 export function* watcherSaga(){
@@ -32,6 +32,10 @@ export function* workerSaga() {
     } catch (error) {
         // dispatch a failure action to the store with the error
         yield put({ type: "GET_CONTENT_ERROR", error });
+    } finally {
+        if (yield cancelled()){
+            yield put({type: "REQUEST_CANCELED", cancel});
+        }
     }
 }
 

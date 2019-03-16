@@ -5,12 +5,17 @@ import './Button.css';
 interface IButton {
   name: string;
   onRequestContent?: () => void;
+  onCancelRequest?: () => void;
 }
 
-const Button: React.FC<IButton> = ({ name, onRequestContent }: IButton) => {
+const Button: React.FC<IButton> = ({
+  name,
+  onRequestContent,
+  onCancelRequest
+}: IButton) => {
   return (
     <div className="btn__container">
-      <button className="btn" onClick={onRequestContent}>
+      <button className="btn" onClick={onRequestContent || onCancelRequest}>
         {name}
       </button>
     </div>
