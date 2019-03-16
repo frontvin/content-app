@@ -14,8 +14,8 @@ interface IState {
 interface IApp {
   content: string,
   loading: boolean,
-  onRequestContent?: () => void;
-  onCancelRequest?: () => void;
+  onRequestContent: () => void;
+  onCancelRequest: () => void;
 }
 
 // App class

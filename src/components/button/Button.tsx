@@ -4,7 +4,7 @@ import './Button.css';
 // button
 interface IButton {
   btnName: string;
-  btnEvent?: () => void;
+  btnEvent: () => void;
 }
 
 const Button: React.FC<IButton> = ({

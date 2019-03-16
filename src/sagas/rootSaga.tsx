@@ -2,17 +2,19 @@ import axios from 'axios'
 
 import { call, put, takeLatest, cancel, cancelled } from "redux-saga/effects";
 
-// test
+// watcher saga
 export function* watcherSaga(){
     yield takeLatest("GET_CONTENT_REQUEST", workerSaga)
 }
 
+// delay function
 function delay(ms : number) {
     return new Promise((resolve) => {
         setTimeout(() => { resolve() } , ms)
     })
 }
 
+// axios request function
 function axiosGetContent() {
     return delay(5000).then(() => {
         return axios({
@@ -22,11 +24,13 @@ function axiosGetContent() {
     })
 }
 
+// worker saga
 export function* workerSaga() {
     try {
         const response = yield call(axiosGetContent);
         const content = JSON.stringify(response);
-        // dispatch a success action to the store with the new dog
+
+        // dispatch a success action to the store with new content
         yield put({ type: "GET_CONTENT_SUCCESS", content });
 
     } catch (error) {
@@ -34,7 +38,8 @@ export function* workerSaga() {
         yield put({ type: "GET_CONTENT_ERROR", error });
     } finally {
         if (yield cancelled()){
-            yield put({type: "REQUEST_CANCELED", cancel});
+            // dispatch cancel action 
+            yield put({ type: "REQUEST_CANCELED" });
         }
     }
 }

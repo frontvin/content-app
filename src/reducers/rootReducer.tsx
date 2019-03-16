@@ -15,34 +15,36 @@ const initialState = {
 export function reducer (state = initialState, action: any ) {
   switch (action.type) {
     case GET_CONTENT_REQUEST:
-      return { 
-        ...state, 
-        axRequest: true, 
-        loading: true, 
+      return {
+        ...state,
+        axRequest: true,
+        loading: true,
+        cancelRequest: false
       };
       break;
     case GET_CONTENT_SUCCESS:
-      return { 
-        ...state, 
-        axRequest: false, 
-        loading: false, 
-        content: action.content 
+      return {
+        ...state,
+        axRequest: false,
+        loading: false,
+        content: action.content,
+        cancelRequest: false
       };
       break;
     case GET_CONTENT_ERROR:
-      return {  
-        ...state,  
-        loading: true, 
-        error: action.error  
+      return {
+        ...state,
+        loading: true,
+        error: action.error,
       };
       break;
     case REQUEST_CANCELED:
       return {
         ...state,
         loading: false,
-        cancelRequest: action.cancelRequest,
-      }
+        cancelRequest: action.cancelRequest
+      };
     default:
-      return state
+      return state;
   }
 }
