@@ -1,18 +1,19 @@
 import {
+  CANCEL_REQUEST,
   GET_CONTENT_REQUEST,
   GET_CONTENT_SUCCESS,
   GET_CONTENT_ERROR,
-  REQUEST_CANCELED } from '../actions/actions'
+} from "../actions/actions";
 
 const initialState = {
   axRequest: false,
-  content: '',
+  content: "",
   loading: false,
   error: null,
   cancelRequest: false
 };
 
-export function reducer (state = initialState, action: any ) {
+export function reducer(state = initialState, action: any) {
   switch (action.type) {
     case GET_CONTENT_REQUEST:
       return {
@@ -22,6 +23,14 @@ export function reducer (state = initialState, action: any ) {
         cancelRequest: false
       };
       break;
+    case CANCEL_REQUEST:
+      return {
+        ...state,
+        axRequest: false,
+        loading: false,
+        cancelRequest: true
+      };
+
     case GET_CONTENT_SUCCESS:
       return {
         ...state,
@@ -35,15 +44,9 @@ export function reducer (state = initialState, action: any ) {
       return {
         ...state,
         loading: true,
-        error: action.error,
+        error: action.error
       };
       break;
-    case REQUEST_CANCELED:
-      return {
-        ...state,
-        loading: false,
-        cancelRequest: action.cancelRequest
-      };
     default:
       return state;
   }

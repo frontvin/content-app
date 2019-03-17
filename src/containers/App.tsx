@@ -4,7 +4,6 @@ import Button from '../components/button/Button'
 import Content from '../components/content/Content'
 import { CircleSpinner } from "react-spinners-kit";
 import './App.css'
-import { cancel } from 'redux-saga/effects';
 
 // App interfaces
 interface IState {
@@ -28,51 +27,58 @@ class App extends Component<IApp, IState> {
       loading,
       content
     } = this.props;
-    
+
     const buttons = [
       { bntName: "Get Posts", btnEvent: onRequestContent },
       { bntName: "Cancel request", btnEvent: onCancelRequest }
     ];
 
-        return (
-          <div className="app">
-            <div className="btn__container">
-              {buttons.map((button, index) => {
-                return <Button key={index} btnName={button.bntName} btnEvent={button.btnEvent} />
-              })}
-            </div>
+    return (
+      <div className="app">
+        <div className="btn__container">
+          {buttons.map((button, index) => {
+            return <Button key={index} btnName={button.bntName} btnEvent={button.btnEvent} />
+          })}
+        </div>
 
-            { loading ? 
-              <div className="spinner__container">
-                <CircleSpinner
-                  size={30}
-                  color="#458435"
-                  loading={loading}
-                />
-              </div>
-             : 
-              <Content content={content} />
-            }
+        {loading ?
+          <div className="spinner__container">
+            <CircleSpinner
+              size={30}
+              color="#458435"
+              loading={loading}
+            />
           </div>
-        );
+          :
+          <Content content={content} />
+        }
+      </div>
+    );
   }
 }
 
-const mapStateToProps = ( state: { axRequest: any; loading: any; content: string; error: any; cancelRequest: boolean} ) => {
-    return {
-        axRequest: state.axRequest,
-        loading: state.loading,
-        content: state.content,
-        error: state.error,
-        cancelRequest: state.cancelRequest
-    };
+const mapStateToProps = (
+  state: { 
+    axRequest: any; 
+    loading: any; 
+    content: string; 
+    error: any; 
+    cancelRequest: boolean 
+  }) => {
+  return {
+    axRequest: state.axRequest,
+    loading: state.loading,
+    content: state.content,
+    error: state.error,
+    cancelRequest: state.cancelRequest
+  };
 };
 
 const mapDispatchToProps = (dispatch: (arg0: { type: string; }) => void) => {
-    return {
-        onRequestContent: () => dispatch({ type: "GET_CONTENT_REQUEST" }),
-        onCancelRequest: () => dispatch({ type: "CANCEL_REQUEST" })
-    };
+  return {
+    onRequestContent: () => dispatch({ type: "GET_CONTENT_REQUEST" }),
+    onCancelRequest: () => dispatch({ type: "CANCEL_REQUEST" })
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
