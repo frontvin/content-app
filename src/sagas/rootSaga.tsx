@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { call, put, take, race, cancelled } from "redux-saga/effects";
+import { call, put, take, race } from "redux-saga/effects";
 
 // watcher saga
 export function* watcherSaga() {
