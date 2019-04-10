@@ -36,7 +36,7 @@ export function reducer(state = initialState, action: any) {
         ...state,
         axRequest: false,
         loading: false,
-        content: action.content,
+        content: action.payload,
         cancelRequest: false
       };
       break;

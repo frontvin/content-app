@@ -4,6 +4,7 @@ import Button from '../components/button/Button'
 import Content from '../components/content/Content'
 import { CircleSpinner } from "react-spinners-kit";
 import './App.css'
+import { axiosGetContentAction } from '../actions/actions';
 
 // App interfaces
 interface IState {
@@ -76,7 +77,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch: (arg0: { type: string; }) => void) => {
   return {
-    onRequestContent: () => dispatch({ type: "GET_CONTENT_REQUEST" }),
+    onRequestContent: () => dispatch(axiosGetContentAction.request()),
     onCancelRequest: () => dispatch({ type: "CANCEL_REQUEST" })
   };
 };

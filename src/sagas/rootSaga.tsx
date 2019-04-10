@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { axiosGetContentAction } from '../actions/actions';
 import { call, put, take, race } from "redux-saga/effects";
 
 // watcher saga
@@ -21,7 +21,7 @@ function delay(ms: number) {
 
 // axios request function
 function axiosGetContent() {
-    return delay(5000).then(() => {
+    return delay(2000).then(() => {
         return axios({
             method: "get",
             url: "https://jsonplaceholder.typicode.com/posts"
@@ -36,9 +36,9 @@ export function* workerSaga() {
         const content = JSON.stringify(response);
 
         // dispatch a success action to the store with new content
-        yield put({ type: "GET_CONTENT_SUCCESS", content });
+        yield put(axiosGetContentAction.success(content));
     } catch (error) {
         // dispatch a failure action to the store with the error
-        yield put({ type: "GET_CONTENT_ERROR", error });
+        yield put(axiosGetContentAction.failure(error));
     }
 }
